@@ -401,8 +401,8 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
-    description: 'Create your blog content';
-    displayName: 'Article';
+    description: 'Crie o conte\u00FAdo do seu blog';
+    displayName: 'Artigo';
     pluralName: 'articles';
     singularName: 'article';
   };
@@ -441,8 +441,8 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
 export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   collectionName: 'authors';
   info: {
-    description: 'Create authors for your content';
-    displayName: 'Author';
+    description: 'Crie autores para seu conte\u00FAdo';
+    displayName: 'Autor';
     pluralName: 'authors';
     singularName: 'author';
   };
@@ -473,8 +473,8 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
-    description: 'Organize your content into categories';
-    displayName: 'Category';
+    description: 'Organize seu conte\u00FAdo em categorias';
+    displayName: 'Categoria';
     pluralName: 'categories';
     singularName: 'category';
   };
