@@ -20,6 +20,6 @@ jobs:
         node-version: 21
         cache: 'npm'
     - run: npm install 
-    - run: pnpm start
+    - run: strapi start
     - run: npx playwright test
     - run: npm run actions
