@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 import data from '../../data/data.json';
 
-test.describe('Testes da API de Autor', () => {
-    const baseURL = 'http://localhost:1337/api';
+const baseURL = `https://promising-butterfly-aece44035d.strapiapp.com/api`;
 
+test.describe('Testes da API de Autor', () => {
     test('POST /authors - deve criar um novo autor', async ({ request }) => {
         const novoAutor = {
             name: 'Jane Doe',

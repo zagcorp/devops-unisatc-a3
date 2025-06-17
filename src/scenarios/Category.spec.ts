@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
-import data from '../../data/data.json';
+
+const baseURL = `https://promising-butterfly-aece44035d.strapiapp.com/api`;
 
 test.describe('Testes da API de Categoria', () => {
-    const baseURL = 'http://localhost:1337/api';
-
     test('GET /categories - deve retornar uma lista de categorias', async ({ request }) => {
         const response = await request.get(`${baseURL}/categories`);
         expect(response.status()).toBe(200);
@@ -12,15 +11,18 @@ test.describe('Testes da API de Categoria', () => {
         expect(responseBody).toHaveProperty('data');
         expect(Array.isArray(responseBody.data)).toBe(true);
 
-        // Valida se as categorias retornadas correspondem às do arquivo data.json
-        const categoriasEsperadas = data.categories.map(categoria => categoria.name);
-        const categoriasRetornadas = responseBody.data.map((categoria: any) => categoria.attributes.name);
-        expect(categoriasRetornadas).toEqual(expect.arrayContaining(categoriasEsperadas));
+        // Valida se as categorias retornadas possuem os atributos definidos no schema.json
+        responseBody.data.forEach((categoria: any) => {
+            expect(categoria.attributes).toHaveProperty('name');
+            expect(categoria.attributes).toHaveProperty('slug');
+            expect(categoria.attributes).toHaveProperty('description');
+        });
     });
 
     test('POST /categories - deve criar uma nova categoria', async ({ request }) => {
         const novaCategoria = {
             name: 'Categoria Exemplo',
+            slug: 'categoria-exemplo',
             description: 'Descrição de exemplo',
         };
 
@@ -32,6 +34,7 @@ test.describe('Testes da API de Categoria', () => {
         const responseBody = await response.json();
         expect(responseBody).toHaveProperty('data');
         expect(responseBody.data.attributes.name).toBe(novaCategoria.name);
+        expect(responseBody.data.attributes.slug).toBe(novaCategoria.slug);
         expect(responseBody.data.attributes.description).toBe(novaCategoria.description);
     });
 });
